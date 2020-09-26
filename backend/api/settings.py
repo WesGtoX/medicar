@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     # my apps
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -60,16 +61,24 @@ WSGI_APPLICATION = 'api.wsgi.application'
 
 # Database
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": config('POSTGRES_DB', default="postgres"),
-        "USER": config('POSTGRES_USER', default="postgres"),
-        "PASSWORD": config('POSTGRES_PASSWORD', default="postgres"),
-        "HOST": "db",
-        "PORT": 5432,
+if config('PROD', default=False, cast=bool):
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": config('POSTGRES_DB', default="postgres"),
+            "USER": config('POSTGRES_USER', default="postgres"),
+            "PASSWORD": config('POSTGRES_PASSWORD', default="postgres"),
+            "HOST": "db",
+            "PORT": 5432,
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
@@ -90,6 +99,17 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# Global settings for a REST Framework API
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
+
 # Internationalization
 
 LANGUAGE_CODE = 'pt-br'
@@ -105,4 +125,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'conq', 'media')
+MEDIA_URL = '/media/'
+
+
+# Replace auth user model
+
+AUTH_USER_MODEL = 'users.User'
