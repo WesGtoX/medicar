@@ -25,7 +25,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     # my apps
-    'users'
+    'users',
+    'medicar'
 ]
 
 MIDDLEWARE = [
@@ -61,24 +62,16 @@ WSGI_APPLICATION = 'api.wsgi.application'
 
 # Database
 
-if config('PROD', default=False, cast=bool):
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": config('POSTGRES_DB', default="postgres"),
-            "USER": config('POSTGRES_USER', default="postgres"),
-            "PASSWORD": config('POSTGRES_PASSWORD', default="postgres"),
-            "HOST": "db",
-            "PORT": 5432,
-        }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config('POSTGRES_DB', default="postgres"),
+        "USER": config('POSTGRES_USER', default="postgres"),
+        "PASSWORD": config('POSTGRES_PASSWORD', default="postgres"),
+        "HOST": "db",
+        "PORT": 5432,
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
 
 
 # Password validation
