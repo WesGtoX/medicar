@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 
-from .filters import SpecialtyFilter
+from .filters import SpecialtyFilter, DoctorFilter
 from .models import Specialty, Doctor, Agenda, MedicalAppointment
 from .serializers import (
     SpecialtySerializer, DoctorSerializer,
@@ -19,6 +19,8 @@ class SpecialtyViewSet(viewsets.ReadOnlyModelViewSet):
 class DoctorViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = DoctorFilter
 
 
 class AgendaViewSet(viewsets.ReadOnlyModelViewSet):

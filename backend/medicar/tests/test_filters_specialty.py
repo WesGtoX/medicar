@@ -26,14 +26,14 @@ class SpecialtyViewSetTests(APITestCase):
         SpecialtyFactory.create_batch(3, name='Cardiologia')
         SpecialtyFactory.create_batch(5, name='Pediatria')
 
-        response = self.client.get(f'{reverse("specialty-list")}{"?name=Cardiologia"}')
+        response = self.client.get(f'{reverse("specialty-list")}{"?search=Cardiologia"}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 3)
 
-        response = self.client.get(f'{reverse("specialty-list")}{"?name=ped"}')
+        response = self.client.get(f'{reverse("specialty-list")}{"?search=ped"}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 5)
 
-        response = self.client.get(f'{reverse("specialty-list")}{"?name=pat"}')
+        response = self.client.get(f'{reverse("specialty-list")}{"?search=pat"}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 0)
