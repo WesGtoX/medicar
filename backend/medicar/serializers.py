@@ -16,7 +16,7 @@ class DoctorSerializer(serializers.ModelSerializer):
 
     def get_specialty(self, obj):
         return SpecialtySerializer(Specialty.objects.filter(
-            doctor=obj), many=True, read_only=True).data
+            doctor=obj).first(), read_only=True).data
 
     class Meta:
         model = Doctor
@@ -35,7 +35,7 @@ class AgendaSerializer(serializers.ModelSerializer):
 
     def get_doctor(self, obj):
         return DoctorSerializer(Doctor.objects.filter(
-            id=obj.doctor.id).first()).data
+            id=obj.doctor.id).first(), read_only=True).data
 
     class Meta:
         model = Agenda
@@ -55,7 +55,8 @@ class MedicalAppointmentSerializer(serializers.ModelSerializer):
         return Agenda.objects.filter(id=obj.id).day
 
     def get_doctor(self, obj):
-        return DoctorSerializer(Doctor.objects.filter(id=obj.id)).data
+        return DoctorSerializer(Doctor.objects.filter(
+            id=obj.doctor.id).first(), read_only=True).data
 
     class Meta:
         model = MedicalAppointment
