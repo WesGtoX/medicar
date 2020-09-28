@@ -1,7 +1,10 @@
+import time
+import datetime
+
 from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 
-from .filters import SpecialtyFilter, DoctorFilter
+from .filters import SpecialtyFilter, DoctorFilter, AgendaFilter
 from .models import Specialty, Doctor, Agenda, MedicalAppointment
 from .serializers import (
     SpecialtySerializer, DoctorSerializer,
@@ -26,6 +29,19 @@ class DoctorViewSet(viewsets.ReadOnlyModelViewSet):
 class AgendaViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Agenda.objects.all()
     serializer_class = AgendaSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = AgendaFilter
+
+    def get_queryset(self):
+        date_now = datetime.date.today()
+        queryset = Agenda.objects.filter(day__gte=date_now, schedule__len__gt=0)
+        time_now = time.strftime("%H:%M:%S")
+        for agenda in queryset:
+            for schedule in agenda.schedule:
+                if time_now > str(schedule) and date_now >= agenda.day:
+                    agenda.schedule.remove(schedule)
+                    agenda.save()
+        return queryset
 
 
 class MedicalAppointmentViewSet(viewsets.ModelViewSet):

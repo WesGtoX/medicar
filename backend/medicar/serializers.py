@@ -34,14 +34,15 @@ class AgendaSerializer(serializers.ModelSerializer):
     doctor = serializers.SerializerMethodField()
 
     def get_doctor(self, obj):
-        return DoctorSerializer(Doctor.objects.filter(id=obj.id)).data
+        return DoctorSerializer(Doctor.objects.filter(
+            id=obj.doctor.id).first()).data
 
     class Meta:
         model = Agenda
         fields = [
             'id',
             'day',
-            'schedule'
+            'schedule',
             'doctor',
         ]
 

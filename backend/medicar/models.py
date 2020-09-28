@@ -57,7 +57,7 @@ class Agenda(models.Model):
     )
     day = models.DateField('Dia', blank=False, null=False)
     schedule = ArrayField(
-        models.TimeField('Horários', blank=False, null=False)
+        models.TimeField('Horários')
     )
 
     def clean(self):
@@ -66,6 +66,11 @@ class Agenda(models.Model):
 
     def __str__(self):
         return f'Agenda: {self.doctor.name}, data: {self.day}'
+
+    class Meta:
+        verbose_name = 'Agenda'
+        verbose_name_plural = 'Agendas'
+        ordering = ['day']
 
 
 class MedicalAppointment(models.Model):
@@ -81,3 +86,8 @@ class MedicalAppointment(models.Model):
         on_delete=models.CASCADE
     )
     scheduling_date = models.DateTimeField('Data de agendamento', auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Consulta'
+        verbose_name_plural = 'Consultas'
+        ordering = ['id']
