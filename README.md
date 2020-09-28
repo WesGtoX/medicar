@@ -3,7 +3,7 @@
     <img src=".github/logo.png" alt="Medicar" title="Medicar" width="300px">
   </a>
   <br />
-  <img alt="Medicar CI" src="https://github.com/WesGtoX/navedex-api/workflows/Medicar%20CI/badge.svg" />
+  <img alt="Medicar CI" src="https://github.com/WesGtoX/medicar/workflows/Medicar%20CI/badge.svg" />
 </h1>
 
 <p align="center">
