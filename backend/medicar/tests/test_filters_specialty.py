@@ -10,7 +10,7 @@ from .fixture import SpecialtyFactory
 User = get_user_model()
 
 
-class SpecialtyViewSetTests(APITestCase):
+class SpecialtyFilterTests(APITestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(email='bruce@user.com', password='foo')
