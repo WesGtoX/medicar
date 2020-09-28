@@ -38,6 +38,6 @@ class AgendaFactory(factory.django.DjangoModelFactory):
 class MedicalAppointmentFactory(factory.django.DjangoModelFactory):
 
     class Meta:
-        models = MedicalAppointment
+        model = MedicalAppointment
 
     hourly = factory.Faker('word', ext_word_list=['08:00', '08:30', '09:00', '09:30', '14:00'])
