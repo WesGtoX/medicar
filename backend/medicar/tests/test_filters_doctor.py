@@ -21,9 +21,9 @@ class DoctorFilterTests(APITestCase):
         self.client = APIClient()
         token, _ = Token.objects.get_or_create(user=self.user)
         self.client.credentials(HTTP_AUTHORIZATION=f'Token {token.key}')
-        self.specialtyA = SpecialtyFactory.create(name='Cardiologia')
-        self.specialtyB = SpecialtyFactory.create(name='Pediatria')
-        self.specialtyC = SpecialtyFactory.create(name='Dermatologia')
+        self.specialtyA = SpecialtyFactory.create(id=21, name='Cardiologia')
+        self.specialtyB = SpecialtyFactory.create(id=22, name='Pediatria')
+        self.specialtyC = SpecialtyFactory.create(id=23, name='Dermatologia')
 
     def test_filter(self):
         DoctorFactory.create_batch(3, name='Jane', specialty=self.specialtyA)
@@ -35,14 +35,14 @@ class DoctorFilterTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 4)
 
-        response = self.client.get(f'{reverse("doctor-list")}{"?specialty=1&specialty=3"}')
+        response = self.client.get(f'{reverse("doctor-list")}{"?specialty=21&specialty=23"}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 5)
 
-        response = self.client.get(f'{reverse("doctor-list")}{"?search=jane&specialty=1&specialty=2"}')
+        response = self.client.get(f'{reverse("doctor-list")}{"?search=jane&specialty=21&specialty=22"}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 4)
 
-        response = self.client.get(f'{reverse("doctor-list")}{"?search=Bruce&specialty=1&specialty=3"}')
+        response = self.client.get(f'{reverse("doctor-list")}{"?search=Bruce&specialty=21&specialty=23"}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 0)

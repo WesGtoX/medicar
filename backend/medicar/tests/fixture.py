@@ -32,7 +32,14 @@ class AgendaFactory(factory.django.DjangoModelFactory):
         model = Agenda
 
     day = factory.Faker('date_between', start_date='today', end_date='+1y')
-    schedule = ['08:00', '08:30', '09:00', '09:30', '14:00']
+    schedule = ['00:00', '08:00', '08:30', '09:00', '09:30', '14:00']
+
+    @classmethod
+    def _create(cls, model_class, *args, **kwargs):
+        obj = model_class(*args, **kwargs)
+        obj.doctor = DoctorFactory.create(specialty=SpecialtyFactory.create())
+        obj.save()
+        return obj
 
 
 class MedicalAppointmentFactory(factory.django.DjangoModelFactory):
