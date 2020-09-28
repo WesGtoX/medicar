@@ -5,9 +5,17 @@ from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 
 from users.views import UserViewSet
+from medicar.views import (
+    SpecialtyViewSet, DoctorViewSet,
+    AgendaViewSet, MedicalAppointmentViewSet
+)
 
 router = routers.DefaultRouter()
 router.register('users', UserViewSet)
+router.register('especialidades', SpecialtyViewSet)
+router.register('medicos', DoctorViewSet)
+router.register('agendas', AgendaViewSet)
+router.register('consultas', MedicalAppointmentViewSet)
 
 
 urlpatterns = [
