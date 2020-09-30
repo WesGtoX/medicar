@@ -26,12 +26,36 @@
 
 # Medicar
 
-...
+Platform for registering and managing medical appointments and schedules.
 
 
 ## About the Project
 
-...
+### Medicar Back-end
+
+- Administrative system for managing:
+  - Medical specialties
+  - Doctors
+  - Medical agenda
+  - Medical appointment
+
+- API Restfull for:
+  - Creation:
+    - Medical appointment
+
+  - Listing:
+    - Medical specialties
+    - Doctors
+    - Medical agenda
+    - Medical appointment
+
+  - Details:
+    - Medical specialties
+    - Doctors
+    - Medical agenda
+
+  - Removal:
+    - Medical appointment
 
 
 ## Technology 
@@ -54,7 +78,7 @@ This project was developed with the following technologies:
 - [Docker Compose](https://docs.docker.com/compose/)
 
 
-### Install and Run
+### Install and Run the API
 
 1. Clone the repository:
 ```bash
@@ -62,9 +86,13 @@ git clone https://github.com/WesGtoX/medicar.git
 ```
 2. Set a `SECRET_KEY` in `.env`:
 ```bash
-cp .env.sample .env
+cp backend/.env.sample backend/.env
 ```
-3. Run:
+3. Build
+```bash
+make build
+```
+4. Run:
 ```bash
 make run
 ```
@@ -76,9 +104,36 @@ make test
 
 ## Usage
 
-...
+### Endpoints
 
-_For more examples, please refer to the [Documentation]()_
+#### Especialidades
+
+| Method | Endpoint              | Description                              |
+| :----: | --------------------- | ---------------------------------------- |
+| `GET`  | `/especialidades/`    | List all registered specialties.         |
+| `GET`  | `/especialidades/:id` | Show the detail of a specific specialty. |
+
+#### Médicos
+
+| Method | Endpoint       | Description                           |
+| :----: | -------------- | ------------------------------------- |
+| `GET`  | `/medicos/`    | List all registered doctors.          |
+| `GET`  | `/medicos/:id` | Show the detail of a specific doctor. |
+
+#### Agendas
+| Method | Endpoint       | Description                           |
+| :----: | -------------- | ------------------------------------- |
+| `GET`  | `/agendas/`    | List all registered agendas.          |
+| `GET`  | `/agendas/:id` | Show the detail of a specific agenda. |
+
+#### Consultas
+|  Method  | Endpoint         | Description                              |
+| :------: | ---------------- | ---------------------------------------- |
+|  `POST`  | `/consultas/`    | Register a medical appointment.          |
+|  `GET`   | `/consultas/`    | List all registered medical appointment. |
+| `DELETE` | `/consultas/:id` | Remove a specific medical appointment.   |
+
+_For more examples, please refer to the [Documentation](https://github.com/WesGtoX/medicar/wiki)_
 
 
 ## License
