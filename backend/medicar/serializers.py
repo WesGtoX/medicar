@@ -52,11 +52,11 @@ class MedicalAppointmentSerializer(serializers.ModelSerializer):
     doctor = serializers.SerializerMethodField()
 
     def get_day(self, obj):
-        return Agenda.objects.filter(id=obj.id).day
+        return obj.agenda.get_day()
 
     def get_doctor(self, obj):
         return DoctorSerializer(Doctor.objects.filter(
-            id=obj.doctor.id).first(), read_only=True).data
+            id=obj.agenda.doctor_id).first(), read_only=True).data
 
     class Meta:
         model = MedicalAppointment
@@ -64,6 +64,6 @@ class MedicalAppointmentSerializer(serializers.ModelSerializer):
             'id',
             'day',
             'hourly',
-            'scheduling_date'
+            'scheduling_date',
             'doctor',
         ]
