@@ -23,7 +23,7 @@ class DoctorViewSetTests(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION=f'Token {token.key}')
 
     def test_perform_create(self):
-        """register a new doctor"""
+        """methods not allowed returned error 405"""
         data = {
             'name': 'Jane Joe',
             'crm': 1234,
