@@ -64,6 +64,9 @@ class Agenda(models.Model):
         if self.day < datetime.date.today():
             raise ValidationError('Unable to schedule on a past date.')
 
+    def get_day(self):
+        return f'{self.day}'
+
     def __str__(self):
         return f'Agenda: {self.doctor.name}, data: {self.day}'
 
@@ -75,7 +78,7 @@ class Agenda(models.Model):
 
 class MedicalAppointment(models.Model):
     agenda = models.ForeignKey(
-        Agenda, verbose_name='Paciente',
+        Agenda, verbose_name='Agenda',
         related_name='agenda_medical_appointment',
         on_delete=models.CASCADE
     )
@@ -86,6 +89,9 @@ class MedicalAppointment(models.Model):
         on_delete=models.CASCADE
     )
     scheduling_date = models.DateTimeField('Data de agendamento', auto_now_add=True)
+
+    def __str__(self):
+        return f'Consulta: {self.agenda.day}, {self.hourly}, médico: {self.agenda.doctor.name}'
 
     class Meta:
         verbose_name = 'Consulta'
