@@ -26,14 +26,17 @@ class SpecialtyFilterTests(APITestCase):
         SpecialtyFactory.create_batch(3, name='Cardiologia')
         SpecialtyFactory.create_batch(5, name='Pediatria')
 
+        # filter specialty by name
         response = self.client.get(f'{reverse("specialty-list")}{"?search=Cardiologia"}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 3)
 
+        # filter specialty by containing in your name
         response = self.client.get(f'{reverse("specialty-list")}{"?search=ped"}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 5)
 
+        # filter without finding data
         response = self.client.get(f'{reverse("specialty-list")}{"?search=pat"}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 0)

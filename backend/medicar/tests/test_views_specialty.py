@@ -23,6 +23,7 @@ class SpecialtyViewSetTests(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION=f'Token {token.key}')
 
     def test_perform_create(self):
+        """register a new specialty"""
         data = {'name': 'Cardiologia'}
         response = self.unath_client.post(reverse('specialty-list'), data=data)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
@@ -31,6 +32,7 @@ class SpecialtyViewSetTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_list(self):
+        """listing all specialties"""
         SpecialtyFactory.create_batch(5)
 
         response = self.unath_client.get(reverse('specialty-list'))
@@ -41,6 +43,7 @@ class SpecialtyViewSetTests(APITestCase):
         self.assertTrue(len(response.data), 5)
 
     def test_retrieve(self):
+        """details of a specific specialty"""
         specialty = SpecialtyFactory.create(id=10)
 
         response = self.unath_client.get(reverse('specialty-detail', args=[10]))
@@ -51,6 +54,7 @@ class SpecialtyViewSetTests(APITestCase):
         self.assertEqual(response.data['name'], specialty.name)
 
     def test_update(self):
+        """methods not allowed returned error 405"""
         specialty = SpecialtyFactory.create(id=21)
         data = {'name': 'Joe'}
         self.assertNotEqual(specialty.name, data['name'])
@@ -62,6 +66,7 @@ class SpecialtyViewSetTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_partial_update(self):
+        """methods not allowed returned error 405"""
         specialty = SpecialtyFactory.create(id=22)
         data = {'name': 'Joe'}
         self.assertNotEqual(specialty.name, data['name'])
@@ -73,6 +78,7 @@ class SpecialtyViewSetTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_destroy(self):
+        """methods not allowed returned error 405"""
         SpecialtyFactory.create(id=15)
         response = self.unath_client.get(reverse('specialty-detail', args=[15]))
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)

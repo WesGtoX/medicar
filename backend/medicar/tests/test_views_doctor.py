@@ -23,6 +23,7 @@ class DoctorViewSetTests(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION=f'Token {token.key}')
 
     def test_perform_create(self):
+        """register a new doctor"""
         data = {
             'name': 'Jane Joe',
             'crm': 1234,
@@ -36,6 +37,7 @@ class DoctorViewSetTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_list(self):
+        """listing all doctors"""
         DoctorFactory.create_batch(5)
 
         response = self.unath_client.get(reverse('doctor-list'))
@@ -46,6 +48,7 @@ class DoctorViewSetTests(APITestCase):
         self.assertTrue(len(response.data), 5)
 
     def test_retrieve(self):
+        """details of a specific doctor"""
         doctor = DoctorFactory.create(id=10)
 
         response = self.unath_client.get(reverse('doctor-detail', args=[10]))
@@ -56,6 +59,7 @@ class DoctorViewSetTests(APITestCase):
         self.assertEqual(response.data['name'], doctor.name)
 
     def test_update(self):
+        """methods not allowed returned error 405"""
         doctor = DoctorFactory.create(id=21)
         data = {'name': 'Joe'}
         self.assertNotEqual(doctor.name, data['name'])
@@ -67,6 +71,7 @@ class DoctorViewSetTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_partial_update(self):
+        """methods not allowed returned error 405"""
         doctor = DoctorFactory.create(id=22)
         data = {'name': 'Joe'}
         self.assertNotEqual(doctor.name, data['name'])
@@ -78,6 +83,7 @@ class DoctorViewSetTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_destroy(self):
+        """methods not allowed returned error 405"""
         DoctorFactory.create(id=15)
         response = self.unath_client.get(reverse('doctor-detail', args=[15]))
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)

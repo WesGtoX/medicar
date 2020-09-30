@@ -31,18 +31,22 @@ class DoctorFilterTests(APITestCase):
         DoctorFactory.create_batch(2, name='Alfred', specialty=self.specialtyC)
         DoctorFactory.create_batch(1, name='Jane', specialty=self.specialtyB)
 
+        # filter médicos by name
         response = self.client.get(f'{reverse("doctor-list")}{"?search=jane"}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 4)
 
+        # filter doctors by name and specialty
         response = self.client.get(f'{reverse("doctor-list")}{"?specialty=21&specialty=23"}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 5)
 
+        # filter doctors by name and by one or more specialty
         response = self.client.get(f'{reverse("doctor-list")}{"?search=jane&specialty=21&specialty=22"}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 4)
 
+        # filter without finding data
         response = self.client.get(f'{reverse("doctor-list")}{"?search=Bruce&specialty=21&specialty=23"}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 0)

@@ -27,6 +27,7 @@ class AgendaViewSetTests(APITestCase):
         self.doctor = DoctorFactory.create()
 
     def test_perform_create(self):
+        """register a new agenda"""
         data = {
             'doctor': 1,
             'day': Faker().date_between(start_date='today', end_date='+1y')
@@ -38,6 +39,7 @@ class AgendaViewSetTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_list(self):
+        """listing all agendas"""
         AgendaFactory.create_batch(5, doctor=self.doctor)
         AgendaFactory.create_batch(2, doctor=self.doctor)
         AgendaFactory.create_batch(3, doctor=self.doctor, schedule=[])
@@ -50,6 +52,7 @@ class AgendaViewSetTests(APITestCase):
         self.assertTrue(len(response.data), 7)
 
     def test_retrieve(self):
+        """details of a specific agenda"""
         agenda = AgendaFactory.create(id=10)
 
         response = self.unath_client.get(reverse('agenda-detail', args=[10]))
@@ -66,6 +69,7 @@ class AgendaViewSetTests(APITestCase):
         self.assertIsInstance(response.data.get('doctor')['specialty'], dict)
 
     def test_update(self):
+        """methods not allowed returned error 405"""
         AgendaFactory.create(id=15, doctor=self.doctor)
         data = {
             'doctor': 1,
@@ -79,6 +83,7 @@ class AgendaViewSetTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_partial_update(self):
+        """methods not allowed returned error 405"""
         AgendaFactory.create(id=15, doctor=self.doctor)
         data = {
             'doctor': 1,
@@ -92,6 +97,7 @@ class AgendaViewSetTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_destroy(self):
+        """methods not allowed returned error 405"""
         AgendaFactory.create(id=15, doctor=self.doctor)
         response = self.unath_client.get(reverse('agenda-detail', args=[15]))
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)

@@ -8,6 +8,7 @@ fake = Faker(['pt_BR'])
 
 
 class SpecialtyFactory(factory.django.DjangoModelFactory):
+    """Fixture for creating a Specialty"""
 
     class Meta:
         model = Specialty
@@ -16,6 +17,7 @@ class SpecialtyFactory(factory.django.DjangoModelFactory):
 
 
 class DoctorFactory(factory.django.DjangoModelFactory):
+    """Fixture for creating a Doctor"""
 
     class Meta:
         model = Doctor
@@ -27,6 +29,7 @@ class DoctorFactory(factory.django.DjangoModelFactory):
 
 
 class AgendaFactory(factory.django.DjangoModelFactory):
+    """Fixture for creating an Agenda"""
 
     class Meta:
         model = Agenda
@@ -43,6 +46,7 @@ class AgendaFactory(factory.django.DjangoModelFactory):
 
 
 class MedicalAppointmentFactory(factory.django.DjangoModelFactory):
+    """Fixture for creating a Medical Appointment"""
 
     class Meta:
         model = MedicalAppointment

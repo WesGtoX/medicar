@@ -45,22 +45,27 @@ class AgendaFilterTests(APITestCase):
         start_date = Faker().date_between(start_date='+20d', end_date='+20d')
         end_date = Faker().date_between(start_date='+51d', end_date='+51d')
 
+        # filter agenda by one or more doctors
         response = self.client.get(f'{reverse("agenda-list")}{"?doctor=7&doctor=8"}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)
 
+        # filter agenda over a range of dates
         response = self.client.get(f'{reverse("agenda-list")}?start_date={start_date}&end_date={end_date}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertGreaterEqual(len(response.data), 7)
 
+        # filter agenda by doctor and specialty
         response = self.client.get(f'{reverse("agenda-list")}{"?doctor=7&specialty=7"}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
 
+        # filter agenda by specialty
         response = self.client.get(f'{reverse("agenda-list")}{"?specialty=7"}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
 
+        # filter without finding data
         response = self.client.get(f'{reverse("agenda-list")}{"?doctor=8&specialty=10&specialty=14"}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 0)

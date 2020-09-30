@@ -70,8 +70,8 @@ class MedicalAppointmentViewSet(viewsets.ModelViewSet):
         medical_appointment = MedicalAppointment()
         medical_appointment.patient = request.user
 
+        # validate that the agenda exists
         try:
-            # validate that the agenda exists
             agenda = Agenda.objects.get(pk=request.data.get('agenda_id'))
         except Agenda.DoesNotExist as e:
             error = dict(status=400, error={'message': str(e)})
@@ -79,8 +79,8 @@ class MedicalAppointmentViewSet(viewsets.ModelViewSet):
 
         hourly = request.data.get('hourly')
 
+        # validate that the hour has a valid format
         try:
-            # validate that the hour has a valid format
             time.strptime(hourly, "%H:%M")
         except ValueError:
             error = dict(
@@ -89,16 +89,16 @@ class MedicalAppointmentViewSet(viewsets.ModelViewSet):
             )
             return Response(error, status=status.HTTP_400_BAD_REQUEST)
 
+        # return an error when the query is on a past date or time
         date_now, time_now = datetime.date.today(), time.strftime("%H:%M")
         if agenda.day < date_now or (agenda.day == date_now and str(hourly) < time_now):
-            # return an error when the query is on a past date or time
             error = dict(status=400, error={'message': 'Não é possível marcar uma consulta em um tempo passado!'})
             return Response(error, status=status.HTTP_400_BAD_REQUEST)
 
         for schedule in agenda.schedule:
             if str(schedule.strftime("%H:%M")) == hourly:
+                # return an error when an appointment already exists at the same time
                 if MedicalAppointment.objects.filter(agenda__day=agenda.day, hourly=hourly).exists():
-                    # return an error when an appointment already exists at the same time
                     error = dict(status=400, error={'message': 'Já existe uma consulta marcada neste horário!'})
                     return Response(error, status=status.HTTP_400_BAD_REQUEST)
 
@@ -107,8 +107,8 @@ class MedicalAppointmentViewSet(viewsets.ModelViewSet):
                 medical_appointment.save()
 
                 agenda_schedule = Agenda.objects.filter(schedule__contains=[hourly], id=agenda.id)
+                # remove the scheduled time from the calendar
                 if agenda_schedule.exists():
-                    # remove the scheduled time from the calendar
                     agenda_obj = agenda_schedule.first()
                     agenda_obj.schedule.remove(schedule)
                     agenda_obj.save()
@@ -134,9 +134,9 @@ class MedicalAppointmentViewSet(viewsets.ModelViewSet):
         if medical_appointment.exists():
             appointment = medical_appointment.first()
 
+            # return error when trying to remove a query that has already happened
             date_now, time_now = datetime.date.today(), time.strftime("%H:%M")
             if appointment.agenda.day < date_now or (appointment.agenda.day == date_now and str(appointment.hourly) < time_now):
-                # return error when trying to remove a query that has already happened
                 error = dict(
                     status=400, error={'message': 'Não é possível desmarcar uma consulta que já foi realizada!'}
                 )
