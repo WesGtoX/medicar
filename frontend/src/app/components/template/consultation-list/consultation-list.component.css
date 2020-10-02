@@ -1,0 +1,100 @@
+.body-list {
+    display: flex;
+    max-height: 100%;
+    background: #ffffff;
+    justify-content: center;
+}
+
+.list {
+    display: inline;
+    min-width: 800px;
+    min-height: 90vh;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    margin: 0 0 8px 0;
+    padding: 8px;
+}
+
+.list-header {
+    display: flex;
+    width: 100%;
+    font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+    letter-spacing: normal;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title {
+    color: #444444;
+    margin: 10px 0 0;
+}
+
+.new-consultation {
+    display: flex;
+    width: 130px;
+    height: 25px;
+    color: #ffffff;
+    background: #49B4BB;
+    font: normal 13px Roboto, "Helvetica Neue", sans-serif;
+    /* padding: 6px 12px; */
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    margin: 10px 0 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+}
+
+.list-table {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+table {
+    text-align: left;
+    width: 100%;
+}
+
+th {
+    font: 700 12px Roboto, "Helvetica Neue", sans-serif;
+    letter-spacing: 0.9px;
+    color: #A8A8A8;
+}
+
+tr {
+    height: 32px;
+}
+
+tr.table-items:nth-child(odd) {
+    background: #F8F8F8;
+}
+
+td {
+    font: normal 13px Roboto, "Helvetica Neue", sans-serif;
+    color: #444444;
+}
+
+.button-uncheck {
+    display: flex;
+    color: #49B4BB;
+    background: inherit;
+    font: normal 13px Roboto, "Helvetica Neue", sans-serif;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.new-consultation:focus, .button-uncheck:focus {
+    outline: none;
+}
+
+button .button-uncheck img {
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0 8px 0 0;
+}
