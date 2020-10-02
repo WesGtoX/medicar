@@ -1,0 +1,82 @@
+.body-login {
+    display: flex;
+    min-height: 100%;
+    background: #ffffff;
+    align-items: center;
+    justify-content: center;
+}
+
+.login {
+    display: inline;
+}
+
+.login img-logo {
+    margin: 0 0 20px 0;
+}
+
+.login .logo {
+    max-height: 50px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form input:focus, .form button:focus {
+    outline: none;
+}
+
+.form .form-login {
+    width: 400px;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #A8A8A8;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font: normal 13px Roboto, "Helvetica Neue", sans-serif;
+    color: #A8A8A8;
+    padding: 12px 8px;
+    margin: 20px 0 0 0;
+}
+
+.form .remember-password {
+    display: flex;
+    font: normal 13px Roboto, "Helvetica Neue", sans-serif;
+    color: #A8A8A8;
+    align-items: center;
+    margin: 8px 0 0 0;
+}
+
+.form .remember-password input {
+    margin: 0 8px 0 0;
+}
+
+.form .btn-login {
+    display: flex;
+    font: bold 18px Roboto, "Helvetica Neue", sans-serif;
+    justify-content: space-between;
+    margin: 40px 0 0 0;
+}
+
+.form .btn-login .btn {
+    width: 180px;
+    height: 40px;
+    font: 700 18px Roboto, "Helvetica Neue", sans-serif;
+    letter-spacing: 1px;
+    color: #ffffff;
+    background: #ffffff;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+.form .btn-login .btn-signup {
+    color: #49B4BB;
+}
+
+.form .btn-login .btn-sign {
+    background: #49B4BB;
+}
