@@ -1,0 +1,52 @@
+.navbar {
+    display: flex;
+    max-height: 60px;
+    align-items: center;
+    background: #ffffff;
+    justify-content: center;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    width: 800px;
+    height: 60px;
+    align-items: center;
+    align-self: center;
+    justify-content: space-between;
+}
+
+.header a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;;
+}
+
+.header .logo {
+    max-height: 25px;
+}
+
+.header .header-right {
+    display: flex;
+    font: normal 20px/32px Roboto, "Helvetica Neue", sans-serif;
+    letter-spacing: normal;
+}
+
+.header .user-logged {
+    color: #A8A8A8;
+    margin: 0 20px 0 0;
+}
+
+.header .logout {
+    color: #49B4BB;
+    background: inherit;
+    font: inherit;
+    border: none;
+    cursor: pointer;
+    margin: 0 0 0 20px;
+    padding: 0;
+}
+
+.header .logout:focus {
+    outline: none;
+}
