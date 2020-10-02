@@ -106,6 +106,12 @@ make test
 
 ### Endpoints
 
+### Auth Token
+
+| Method | Endpoint           | Description          |
+| :----: | ------------------ | -------------------- |
+| `POST` | `/api-token-auth/` | User authentication. |
+
 #### Especialidades
 
 | Method | Endpoint              | Description                              |
