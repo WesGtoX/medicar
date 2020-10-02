@@ -1,0 +1,34 @@
+<div class="body-consultation">
+    <div class="consultation">
+        <div class="consultation-title">
+            <p class="title">Consulta Clínica</p>
+        </div>
+
+        <div class="form">
+            <select class="selected-item" id="specialty" formControlName="specialty">
+                <option [value]="null" disabled>Especialidade</option>
+                <!-- <option>Teste</option> -->
+            </select>
+
+            <select class="selected-item" id="doctor" formControlName="doctor">
+                <option [value]="null" disabled>Médico</option>
+                <!-- <option>Teste</option> -->
+            </select>
+
+            <select class="selected-item" id="data" formControlName="data">
+                <option [value]="null" disabled>Data</option>
+                <!-- <option>Teste</option> -->
+            </select>
+
+            <select class="selected-item" id="time" formControlName="time">
+                <option [value]="null" disabled>Hora</option>
+                <!-- <option>Teste</option> -->
+            </select>
+
+            <div class="btn-consultation">
+                <button class="btn btn-cancel">Cancelar</button>
+                <button class="btn btn-confirm" disabled>Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>

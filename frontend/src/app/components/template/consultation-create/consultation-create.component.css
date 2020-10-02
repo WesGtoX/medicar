@@ -1,0 +1,101 @@
+.body-consultation {
+    display: flex;
+    min-height: 100%;
+    /* background: #ffffff; */
+    background: rgba(0, 0, 0, 0.3);
+    align-items: center;
+    justify-content: center;
+}
+
+.consultation {
+    display: flex;
+    flex-direction: column;
+    min-width: 480px;
+    min-height: 420px;
+    background: #ffffff;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.consultation-title {
+    display: flex;
+    min-width: 400px;
+}
+
+.title {
+    font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+    color: #444444;
+    margin: 0;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    align-self: center;
+    margin: 0;
+}
+
+.form input:focus, .form button:focus, .form select:focus {
+    outline: none;
+}
+
+.form .selected-item {
+    width: 400px;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #A8A8A8;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font: normal 13px Roboto, "Helvetica Neue", sans-serif;
+    color: #A8A8A8;
+    padding: 12px 8px;
+    margin: 20px 0 0 0;
+}
+
+.form .remember-password {
+    display: flex;
+    font: normal 13px Roboto, "Helvetica Neue", sans-serif;
+    color: #A8A8A8;
+    align-items: center;
+    margin: 8px 0 0 0;
+}
+
+.form .remember-password input {
+    margin: 0 8px 0 0;
+}
+
+.form .btn-consultation {
+    display: flex;
+    font: bold 18px Roboto, "Helvetica Neue", sans-serif;
+    justify-content: space-between;
+    margin: 40px 0 0 0;
+}
+
+.form .btn-consultation .btn {
+    width: 180px;
+    height: 40px;
+    font: 700 18px Roboto, "Helvetica Neue", sans-serif;
+    letter-spacing: 1px;
+    color: #ffffff;
+    background: #ffffff;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+.form .btn-consultation .btn-cancel {
+    color: #49B4BB;
+}
+
+.form .btn-consultation .btn-confirm {
+    background: #49B4BB;
+}
+
+
+.form .btn-consultation .btn-confirm:disabled {
+    background: #D9F1F3;
+}
