@@ -4,10 +4,24 @@
             <img class="logo" src="../../../../assets/img/logo.svg" alt="">
         </div>
 
-        <div class="form">
-            <input class="form-login" type="text" id="email" placeholder="E-mail">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+            <input 
+                class="form-login" 
+                type="text" 
+                id="email" 
+                placeholder="E-mail"
+                autocomplete="email" 
+                formControlName="username"
+            >
             
-            <input class="form-login" type="password" id="password" placeholder="Senha" >
+            <input 
+                class="form-login" 
+                type="password" 
+                id="password" 
+                placeholder="Senha"
+                autocomplete="current-password" 
+                formControlName="password"
+            >
             
             <div class="remember-password">
                 <input type="checkbox" name="remember" id="remember" value="remember">
@@ -15,9 +29,9 @@
             </div>
 
             <div class="btn-login">
-                <button class="btn btn-signup">Criar Conta</button>
-                <button class="btn btn-sign">Acessar</button>
+                <button class="btn btn-signup" routerLink="/register">Criar Conta</button>
+                <button class="btn btn-sign" [disabled]="!loginForm.valid">Acessar</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
