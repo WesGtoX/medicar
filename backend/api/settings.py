@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     # installed apps
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
     # my apps
     'users',
     'medicar'
@@ -32,6 +33,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -58,6 +60,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'api.wsgi.application'
+
+# Cors origin whitelist
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+    "http://127.0.0.1:4200",
+    "http://192.168.56.1:4200",
+]
 
 
 # Database
@@ -95,6 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Global settings for a REST Framework API
 
 REST_FRAMEWORK = {
+    'TIME_FORMAT': '%H:%M',
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
@@ -127,7 +137,7 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'conq', 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'medicar', 'media')
 MEDIA_URL = '/media/'
 
 
