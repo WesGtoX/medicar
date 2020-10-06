@@ -4,18 +4,43 @@
             <img class="logo" src="../../../../assets/img/logo.svg" alt="">
         </div>
 
-        <div class="form">
-            <input class="form-register" type="text" id="name" placeholder="Nome">
-            <input class="form-register" type="text" id="email" placeholder="E-mail">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form">
+            <input 
+                class="form-register" 
+                type="text" id="first_name" 
+                placeholder="Nome" 
+                autocomplete="firstname" 
+                formControlName="first_name"
+            >
             
+            <input 
+                class="form-register" 
+                type="text" id="email" 
+                placeholder="E-mail" 
+                autocomplete="email" 
+                formControlName="email"
+            >
             
-            <input class="form-register" type="password" id="password" placeholder="Senha" >
-            <input class="form-register" type="password" id="confirm-password" placeholder="Confirmar Senha" >
+            <input 
+                class="form-register" 
+                type="password" id="password1" 
+                placeholder="Senha" 
+                autocomplete="off" 
+                formControlName="password1"
+            >
+
+            <input 
+                class="form-register" 
+                type="password" id="password2" 
+                placeholder="Confirmar Senha" 
+                autocomplete="off" 
+                formControlName="password2"
+            >
             
             <div class="btn-register">
-                <button class="btn btn-cancel">Cancelar</button>
-                <button class="btn btn-confirm">Confirmar</button>
+                <button class="btn btn-cancel" type="submit" routerLink="/login">Cancelar</button>
+                <button class="btn btn-confirm" type="submit" [disabled]="!registerForm.valid">Confirmar</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
