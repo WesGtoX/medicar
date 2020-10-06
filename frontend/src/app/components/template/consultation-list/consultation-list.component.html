@@ -10,6 +10,13 @@
         </div>
         <div class="list-table">
             <table>
+                <colgroup>
+                    <col class="twenty" />
+                    <col class="twenty" />
+                    <col class="fifteen" />
+                    <col class="ten" />
+                    <col class="fifteen" />
+                </colgroup>
                 <tr>
                     <th>ESPECIALIDADE</th>
                     <th>PROFISSIONAL</th>
@@ -18,47 +25,11 @@
                     <th></th>
                 </tr>
         
-                <tr class="table-items">
-                    <td>Cardiologia</td>
-                    <td>Dr. Caio Carlos Ferreira</td>
-                    <td>01/01/2020</td>
-                    <td>13:00</td>
-                    <td>
-                        <button class="button-uncheck">
-                            <img src="../../../../assets/icons/icon-close.svg" alt="Fechar">
-                            Desmarcar
-                        </button>
-                    </td>
-                </tr>
-                <tr class="table-items">
-                    <td>Cardiologia</td>
-                    <td>Dr. Caio Carlos Ferreira</td>
-                    <td>01/01/2020</td>
-                    <td>13:00</td>
-                    <td>
-                        <button class="button-uncheck">
-                            <img src="../../../../assets/icons/icon-close.svg" alt="Fechar">
-                            Desmarcar
-                        </button>
-                    </td>
-                </tr>
-                <tr class="table-items">
-                    <td>Cardiologia</td>
-                    <td>Dr. Caio Carlos Ferreira</td>
-                    <td>01/01/2020</td>
-                    <td>13:00</td>
-                    <td>
-                        <button class="button-uncheck">
-                            <img src="../../../../assets/icons/icon-close.svg" alt="Fechar">
-                            Desmarcar
-                        </button>
-                    </td>
-                </tr>
-                <tr class="table-items">
-                    <td>Cardiologia</td>
-                    <td>Dr. Caio Carlos Ferreira</td>
-                    <td>01/01/2020</td>
-                    <td>13:00</td>
+                <tr class="table-items" *ngFor="let c of consultations">
+                    <td>{{ c.doctor.specialty.name }}</td>
+                    <td>{{ c.doctor.name }}</td>
+                    <td>{{ c.day |  date:'MM/dd/yyyy'}}</td>
+                    <td>{{ c.hourly }}</td>
                     <td>
                         <button class="button-uncheck">
                             <img src="../../../../assets/icons/icon-close.svg" alt="Fechar">

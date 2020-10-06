@@ -6,8 +6,10 @@
 }
 
 .list {
-    display: inline;
-    min-width: 800px;
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    max-width: 800px;
     min-height: 90vh;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
     border-radius: 4px;
@@ -36,7 +38,6 @@
     color: #ffffff;
     background: #49B4BB;
     font: normal 13px Roboto, "Helvetica Neue", sans-serif;
-    /* padding: 6px 12px; */
     border-radius: 4px;
     border: none;
     cursor: pointer;
@@ -55,12 +56,7 @@
 table {
     text-align: left;
     width: 100%;
-}
-
-th {
-    font: 700 12px Roboto, "Helvetica Neue", sans-serif;
-    letter-spacing: 0.9px;
-    color: #A8A8A8;
+    table-layout: fixed;
 }
 
 tr {
@@ -71,9 +67,29 @@ tr.table-items:nth-child(odd) {
     background: #F8F8F8;
 }
 
+th {
+    font: 700 12px Roboto, "Helvetica Neue", sans-serif;
+    letter-spacing: 0.9px;
+    color: #A8A8A8;
+    padding: 0 8px;
+}
+
 td {
     font: normal 13px Roboto, "Helvetica Neue", sans-serif;
     color: #444444;
+    padding: 0 8px;
+}
+
+.ten {
+    width: 10%;
+}
+
+.fifteen {
+    width: 15%;
+}
+
+.twenty {
+    width: 20%;
 }
 
 .button-uncheck {

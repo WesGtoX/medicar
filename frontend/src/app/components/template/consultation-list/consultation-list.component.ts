@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MainService } from 'src/app/main.service';
+
 
 @Component({
   selector: 'app-consultation-list',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsultationListComponent implements OnInit {
 
-  constructor() { }
+  consultations = [];
 
-  ngOnInit(): void {
+  constructor(private mainService: MainService) { }
+
+  ngOnInit() {
+    this.mainService.getConsultations()
+      .subscribe(data => this.consultations = data)
   }
-
 }
