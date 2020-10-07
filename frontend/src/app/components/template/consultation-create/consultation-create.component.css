@@ -54,18 +54,6 @@
     margin: 20px 0 0 0;
 }
 
-.form .remember-password {
-    display: flex;
-    font: normal 13px Roboto, "Helvetica Neue", sans-serif;
-    color: #A8A8A8;
-    align-items: center;
-    margin: 8px 0 0 0;
-}
-
-.form .remember-password input {
-    margin: 0 8px 0 0;
-}
-
 .form .btn-consultation {
     display: flex;
     font: bold 18px Roboto, "Helvetica Neue", sans-serif;
