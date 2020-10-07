@@ -1,11 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { User } from './user';
 import { Specialty } from './specialty';
 import { Doctor } from './doctor';
-import { Agenda } from './agenda';
 import { Consultation } from './consultation'
 
 
@@ -14,26 +14,27 @@ import { Consultation } from './consultation'
 })
 export class MainService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router : Router) { }
 
-  url = 'http://192.168.15.21:8000'
+  url = 'http://localhost:8000'
 
   // authentications
   register(data: User): Observable<User> {
     return this.http.post<User>(`${this.url}/users/`, data);
   }
 
-  login(credentials: { username: string, password: string }): Observable<any> {
-    try {
-      return this.http.post(`${this.url}/api-token-auth/`, credentials);
-    } catch (error) {
-      console.log(error)
-    }
+  login(credentials: { username: string, password: string }): Observable<object> {
+    return this.http.post<{token: string}>(`${this.url}/api-token-auth/`, credentials);
+  }
+
+  logout() {
+    localStorage.removeItem("token");
+    this.router.navigate(["login"]);
   }
 
   // specialties
   getSpecialties(): Observable<Specialty[]> {
-    return this.http.get<Specialty[]>(`${this.url}/medicos/`);
+    return this.http.get<Specialty[]>(`${this.url}/especialidades/`);
   }
 
   // doctors
@@ -42,20 +43,20 @@ export class MainService {
   }
 
   // agendas
-  getAgendasFilterDoctors(doctorId: number): Observable<Agenda[]> {
-    return this.http.get<Agenda[]>(`${this.url}/agendas/?doctor=${doctorId}`);
+  getAgendasFilterDoctors(doctorId: number): Observable<object[]> {
+    return this.http.get<object[]>(`${this.url}/agendas/?doctor=${doctorId}`);
   }
 
   // consultations
-  postConsultations(data: Consultation): Observable<Consultation[]> {
-    return this.http.post<Consultation[]>(`${this.url}/consultas/`, data);
+  postConsultations(data: object): Observable<object> {
+    return this.http.post<object>(`${this.url}/consultas/`, data);
   }
 
   getConsultations(): Observable<Consultation[]> {
     return this.http.get<Consultation[]>(`${this.url}/consultas/`);
   }
 
-  deleteConsultations(id: number) {
-    return this.http.get(`${this.url}/consultas/${id}`);
+  deleteConsultation(id: number) {
+    return this.http.delete<{}>(`${this.url}/consultas/${id}`);
   }  
 }
