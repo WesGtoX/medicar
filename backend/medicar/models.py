@@ -50,7 +50,7 @@ class Doctor(models.Model):
 
 
 class Agenda(models.Model):
-    doctor = models.OneToOneField(
+    doctor = models.ForeignKey(
         Doctor, verbose_name='Médico',
         related_name='agenda',
         on_delete=models.CASCADE
