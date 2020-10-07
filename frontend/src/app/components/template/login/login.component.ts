@@ -27,8 +27,14 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     let credentials = this.loginForm.value
-    this.mainService.login(credentials).subscribe(() => {
-      this.router.navigate(['home']);
+
+    
+    this.mainService.login(credentials).subscribe(res => {
+      if (res["token"] !== undefined) {
+        localStorage.setItem("token", res["token"]);
+        localStorage.setItem("name", res["name"]);
+        this.router.navigate(['home']);
+      }
     }, (err) => {
       console.error(err);
     });
