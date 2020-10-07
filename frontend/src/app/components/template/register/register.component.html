@@ -4,7 +4,7 @@
             <img class="logo" src="../../../../assets/img/logo.svg" alt="">
         </div>
 
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form">
+        <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <input 
                 class="form-register" 
                 type="text" id="first_name" 
@@ -38,8 +38,12 @@
             >
             
             <div class="btn-register">
-                <button class="btn btn-cancel" type="submit" routerLink="/login">Cancelar</button>
-                <button class="btn btn-confirm" type="submit" [disabled]="!registerForm.valid">Confirmar</button>
+                <button class="btn btn-cancel" type="submit" routerLink="/login">
+                    Cancelar
+                </button>
+                <button class="btn btn-confirm" type="submit" [disabled]="!registerForm.valid">
+                    Confirmar
+                </button>
             </div>
         </form>
     </div>

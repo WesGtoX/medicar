@@ -11,7 +11,6 @@ import { User } from 'src/app/user';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  submitted = false;
 
   constructor(
     private formBuilder: FormBuilder, 

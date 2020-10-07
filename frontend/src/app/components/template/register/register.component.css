@@ -74,7 +74,11 @@
 }
 
 .form .btn-register .btn-cancel {
+    display: flex;
     color: #49B4BB;
+    text-decoration: none;
+    align-items: center;
+    justify-items: center;
 }
 
 .form .btn-register .btn-confirm {
