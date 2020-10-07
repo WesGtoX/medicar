@@ -3,7 +3,7 @@
     <div class="list">
         <div class="list-header">
             <p class="title">Consulta Clínica</p>
-            <button class="new-consultation">
+            <button class="new-consultation" routerLink="/create">
                 <img src="../../../../assets/icons/icon-plus.svg" alt="Fechar">
                 Nova Consulta
             </button>
@@ -28,10 +28,10 @@
                 <tr class="table-items" *ngFor="let c of consultations">
                     <td>{{ c.doctor.specialty.name }}</td>
                     <td>{{ c.doctor.name }}</td>
-                    <td>{{ c.day |  date:'MM/dd/yyyy'}}</td>
+                    <td>{{ c.day |  date:'MM/dd/yyyy' }}</td>
                     <td>{{ c.hourly }}</td>
                     <td>
-                        <button class="button-uncheck">
+                        <button class="button-uncheck" (click)="onUnmark(c.id)">
                             <img src="../../../../assets/icons/icon-close.svg" alt="Fechar">
                             Desmarcar
                         </button>
