@@ -57,6 +57,21 @@ Platform for registering and managing medical appointments and schedules.
   - Removal:
     - Medical appointment
 
+### Medicar Front-end
+
+- Application login and logout
+- List of authenticated user's medical appointments
+- Make an appointment for a doctor
+- Unmark a doctor's appointment
+- Routes:
+
+  | Routes       | Description         |
+  | ------------ | ------------------- |
+  | `/login`     | Login page          |
+  | ` /register` | Register a user     |
+  | `/home`      | Home page           |
+  | `/create`    | Make an appointment |
+
 
 ## Technology 
 
@@ -68,6 +83,11 @@ This project was developed with the following technologies:
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
 
+
+## Layout
+
+You can view the project layout in the format through this [LINK](https://www.figma.com/file/HAx6cnob0U2Za7LYZN1cVK/Desafio-Full-Stack-Intmed?node-id=0%3A1).  
+Remembering that you will need to have an account at [Figma](http://figma.com/).  
 
 ## Getting Started
 
