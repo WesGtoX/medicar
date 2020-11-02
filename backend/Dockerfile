@@ -1,15 +1,49 @@
-FROM python:3.8-slim-buster
+FROM python:3.8.6-slim-buster
 
-ENV PYTHONUNBUFFERED 1
+ARG DJANGO_ENV
 
-RUN mkdir /app
+ENV DJANGO_ENV=${DJANGO_ENV} \
+    # python
+    PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONHASHSEED=random \
+    # pip
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    PIP_DEFAULT_TIMEOUT=100 \
+    # poetry
+    POETRY_VERSION=1.1.4 \
+    POETRY_NO_INTERACTION=1 \
+    POETRY_VIRTUALENVS_CREATE=false \
+    POETRY_CACHE_DIR='/var/cache/pypoetry' \
+    PATH="$PATH:/root/.poetry/bin"
+
+# system deps
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+        # deps for installing poetry
+        curl \
+        # deps for building python deps
+        build-essential \
+        # cleaning cache
+        && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* \
+        # installing `poetry` package manager
+        && curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python \
+        && poetry --version
+
+# copy only requirements, to cache them in docker layer
 WORKDIR /app
+COPY poetry.lock pyproject.toml /app/
 
-COPY requirements.txt /app/
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+# project initialization
+RUN echo "$DJANGO_ENV" \
+  && poetry install \
+    $(if [ "$DJANGO_ENV" = 'production' ]; then echo '--no-dev'; fi) \
+    --no-interaction --no-ansi \
+  # cleaning poetry installation's cache for production
+  && if [ "$DJANGO_ENV" = 'production' ]; then rm -rf "$POETRY_CACHE_DIR"; fi
 
-COPY requirements-dev.txt /app/
-RUN pip install -r requirements-dev.txt
+COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x '/docker-entrypoint.sh'
 
-COPY . /app/
+ENTRYPOINT ["/docker-entrypoint.sh"]

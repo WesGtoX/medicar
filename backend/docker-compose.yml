@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 
 services:
   db:
@@ -10,7 +10,8 @@ services:
 
   api:
     build: .
-    command: "./docker-entrypoint.sh"
+    environment:
+      - DJANGO_ENV=development
     ports:
       - "8000:8000"
     depends_on:
