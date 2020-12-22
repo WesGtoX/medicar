@@ -164,7 +164,7 @@ _For more examples, please refer to the [Documentation](https://github.com/WesGt
 
 ## License
 
-Distributed under the MIT License. See [LICENSE](LICENSE.md) for more information.
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 ---
 
